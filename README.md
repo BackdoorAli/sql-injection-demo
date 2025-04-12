@@ -1,109 +1,124 @@
-# SQL Injection Demo Project
+# SQL Injection Demo Web App
 
-A comprehensive educational demo by [Mira2720](https://github.com/Mira2720) that illustrates how SQL injection attacks work and how to properly defend against them using Flask apps.
+A deliberately vulnerable web application that demonstrates how SQL injection works, how it can be exploited, and how to properly secure an application against it.
 
----
-
-## What This Project Covers
-
-| Layer        | Feature                                                                |
-|--------------|------------------------------------------------------------------------|
-| Vulnerable   | Basic SQL injection on login forms                                     |
-| Secure       | Defense using parameterized queries                                    |
-| Dashboard    | Side-by-side comparison of vulnerable vs. secure app responses         |
-| Tests        | Pytest scripts showing both failed and passing attempts                |
-| Red vs Blue  | Notebook split: Attacker (Red) and Defender (Blue) perspectives        |
-| Bonus        | Admin Role Bypass, API Login JSON, Blind SQL Injection support         |
+**Author:** [@Mira2720](https://github.com/Mira2720)
 
 ---
 
-## Project Structure
+## Features
+
+- Two app versions: `insecure_app.py` (vulnerable) and `secure_app.py` (safe)
+- Simple login and search system built with Flask and SQLite
+- SQL injection demonstration with clear test cases
+- Docker support with multi-stage build and runtime toggle
+- Bootstrap UI for improved visuals
+- Jupyter notebook walkthrough
+- GitHub Actions CI pipeline
+- Makefile and docker-compose for local workflow
+
+---
+
+## Folder Structure
 
 ```
 sql-injection-demo/
-│
-├── app/                       # Application code
-│   ├── database.py
-│   ├── insecure_app_with_advanced_routes.py
-│   ├── secure_app_with_advanced_routes.py
-│   └── templates/
-│       └── compare.html
-│
-├── static/                    # CSS styles
-│
-├── run_insecure.py            # Run insecure app on port 5000
-├── run_secure.py              # Run secure app on port 5001
-├── compare_app.py             # Side-by-side dashboard on port 5002
-│
-├── tests/                     # Structured test cases
-│   ├── test_insecure_app_failed.py
-│   ├── test_insecure_app_pass.py
-│   ├── test_secure_app_failed.py
-│   ├── test_secure_app_pass.py
-│   └── others...
-│
-├── demo_walkthrough_final.ipynb  # Red Team & Blue Team SQLi walkthrough
-├── requirements.txt
-├── Makefile
-├── docker-compose.yml
-├── Dockerfile
-└── README.md
+├── app/                       # Core application (secure + insecure)
+├── templates/                 # HTML templates (login, search, results)
+├── static/                    # Optional styling
+├── tests/                     # Includes pass/fail injection test cases
+├── Dockerfile                 # Multi-stage container setup
+├── docker-compose.yml         # Simplified container management
+├── Makefile                   # Shortcut commands
+├── demo_walkthrough.ipynb     # Step-by-step notebook explanation
+├── resume_summary.md          # Bullet-point resume description
+└── README.md                  # This file
 ```
 
 ---
 
-## Usage
+## Test Coverage Overview
 
-### 1. Install dependencies
+| Test File                      | Description                              | Target App      | Expected Result        |
+|-------------------------------|------------------------------------------|------------------|------------------------|
+| `test_insecure_app_failed.py` | Uses SQL injection to bypass login       | Insecure App     | ✅ Injection should succeed |
+| `test_insecure_app_pass.py`   | Tests login with correct credentials     | Insecure App     | ✅ Should allow login  |
+| `test_secure_app_failed.py`   | Uses SQL injection to bypass login       | Secure App       | ✅ Injection should fail |
+| `test_secure_app_pass.py`     | Tests login with correct credentials     | Secure App       | ✅ Should allow login  |
+
+---
+
+## Docker Usage
+
+### Build and Run Insecure App:
 ```bash
-pip install -r requirements.txt
+docker build -t sql-demo .
+docker run -p 5000:5000 sql-demo
 ```
 
-### 2. Run the apps in three terminal tabs:
+### Run Secure Version:
+```bash
+docker run -e APP_MODE=secure -p 5000:5000 sql-demo
+```
+
+### Using Docker Compose:
+```bash
+docker compose up --build
+```
+
+To run secure app with compose:
+```bash
+APP_MODE=secure docker compose up --build
+```
+
+---
+
+## Makefile Shortcuts
 
 ```bash
-# Tab 1
-PYTHONPATH=. python3 run_insecure.py
-
-# Tab 2
-PYTHONPATH=. python3 run_secure.py
-
-# Tab 3
-PYTHONPATH=. python3 compare_app.py
+make build         # Build container
+make run           # Run insecure version
+make run-secure    # Run secure version
+make down          # Stop containers
+make test          # Run pytest manually
 ```
-
-### 3. Open your browser at:
-```
-http://127.0.0.1:5002/compare
-```
-
-Use this test case:
-- Username: `' OR 1=1 --`
-- Password: `anything`
 
 ---
 
-## Red Team vs Blue Team Notebook
+## Resume Summary
 
-Check out `demo_walkthrough_final.ipynb` to explore:
-- How the attack works (Red Team)
-- How it's defended (Blue Team)
-- Side-by-side code examples and query breakdown
+Check `resume_summary.md` for a clean, bullet-point summary of this project for your resume or LinkedIn.
 
 ---
 
-## Advanced Features
+## Educational Notebook
 
-- Admin Role Bypass simulation
-- Blind SQL Injection test cases
-- API login endpoint via JSON POST
-- Separate pass/fail test files
-- Code coverage and testing badge coming soon
-- GitHub Pages-ready documentation `/docs` (TBD)
+Open `demo_walkthrough.ipynb` to see a detailed, step-by-step explanation of the vulnerability, exploit, and mitigation.
 
 ---
 
-## Author
+## Additional Advanced Test Coverage
 
-Created and maintained by [Mira2720](https://github.com/Mira2720)  
-Inspired by real-world attack & defense scenarios for portfolio and recruiter demo purposes.
+| Test File                            | Description                                | Target App      | Expected Result        |
+|-------------------------------------|--------------------------------------------|------------------|------------------------|
+| `test_insecure_blind_login.py`      | Blind SQLi using form login                | Insecure App     | ✅ Injection should succeed |
+| `test_secure_blind_login.py`        | Blind SQLi using form login                | Secure App       | ✅ Injection should fail |
+| `test_insecure_admin_bypass.py`     | SQLi bypass of admin role                  | Insecure App     | ✅ Injection should succeed |
+| `test_secure_admin_bypass.py`       | SQLi bypass of admin role                  | Secure App       | ✅ Injection should fail |
+| `test_insecure_api_login.py`        | JSON API login with SQLi                   | Insecure App     | ✅ Injection should succeed |
+| `test_secure_api_login.py`          | JSON API login with SQLi                   | Secure App       | ✅ Injection should fail |
+
+---
+
+## ⚠️ Note on GitHub Actions Test Failures
+
+Some test cases in this project are **intentionally designed to fail** to simulate vulnerabilities like:
+
+- SQL Injection
+- Admin Role Bypass
+- Blind SQL Injection
+
+Because of this, the GitHub Actions CI workflow may report test failures.  
+This is **expected behavior** for educational purposes and does not indicate problems with the project's implementation.
+
+> These failures showcase real-world attack scenarios and are part of the intended design.
