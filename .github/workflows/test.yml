@@ -36,5 +36,4 @@ jobs:
             --ignore=test_insecure_api_login.py \
             --ignore=test_secure_api_login.py \
             --ignore=test_insecure_app_failed.py \
-            --ignore=test_insecure_app_pass.py \
-            --ignore=test_secure_app_pass.py
+            --ignore=test_secure_app_failed.py
