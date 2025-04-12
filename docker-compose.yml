@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  sql-demo:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - APP_MODE=insecure  # change to 'secure' for secure version
+    restart: unless-stopped
