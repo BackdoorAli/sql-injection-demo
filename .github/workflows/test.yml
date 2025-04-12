@@ -26,7 +26,17 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run tests (skip known intentional test failures)
+      - name: Start Insecure App (Background)
+        run: |
+          PYTHONPATH=. nohup python3 run_insecure.py > insecure.log 2>&1 &
+          sleep 5
+
+      - name: Start Secure App (Background)
+        run: |
+          PYTHONPATH=. nohup python3 run_secure.py > secure.log 2>&1 &
+          sleep 5
+
+      - name: Run Tests (Skip Known Intentional Failures)
         run: |
           pytest \
             --ignore=test_insecure_blind_login.py \
@@ -37,3 +47,8 @@ jobs:
             --ignore=test_secure_api_login.py \
             --ignore=test_insecure_app_failed.py \
             --ignore=test_secure_app_failed.py
+
+      - name: Cleanup
+        run: |
+          pkill -f run_insecure.py || true
+          pkill -f run_secure.py || true
