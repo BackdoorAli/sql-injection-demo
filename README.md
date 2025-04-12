@@ -87,7 +87,7 @@ make test          # Run pytest manually
 
 ## Resume Summary
 
-Check `resume_summary.md` for a clean, bullet-point summary of this project for your resume or LinkedIn.
+Check `resume_summary.md` for a clean, bullet-point summary of this project.
 
 ---
 
