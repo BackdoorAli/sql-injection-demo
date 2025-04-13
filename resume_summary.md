@@ -1,5 +1,5 @@
 **Project: SQL Injection Demo Web App**  
-GitHub: [https://github.com/Mira2720/sql-injection-demo](https://github.com/Mira2720/sql-injection-demo)
+GitHub: [https://github.com/BackdoorAli/sql-injection-demo](https://github.com/BackdoorAli/sql-injection-demo)
 
 Built a vulnerable and secure version of a web application to demonstrate SQL Injection (SQLi) attacks and prevention techniques. This project showcases:
 
