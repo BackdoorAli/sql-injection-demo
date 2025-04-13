@@ -2,7 +2,7 @@
 
 A deliberately vulnerable web application that demonstrates how SQL injection works, how it can be exploited, and how to properly secure an application against it.
 
-**Author:** [@Mira2720](https://github.com/Mira2720)
+**Author:** [@BackdoorAli](https://github.com/Mira2720)
 
 ---
 
