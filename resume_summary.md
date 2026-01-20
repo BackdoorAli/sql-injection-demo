@@ -5,7 +5,7 @@ Built a vulnerable and secure version of a web application to demonstrate SQL In
 
 - SQL injection attack simulation via login and search forms
 - Use of insecure dynamic SQL and its risks
-- Secure implementation using parameterized queries (prepared statements)
+- Secure implementation using parameterised queries (prepared statements)
 - Automated SQLi testing with `pytest`
 - Clean UI using Bootstrap for better user experience
 - Jupyter notebook walkthrough explaining the vulnerability and solution
