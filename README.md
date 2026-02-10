@@ -41,10 +41,10 @@ sql-injection-demo/
 
 | Test File                      | Description                              | Target App      | Expected Result        |
 |-------------------------------|------------------------------------------|------------------|------------------------|
-| `test_insecure_app_failed.py` | Uses SQL injection to bypass login       | Insecure App     | ✅ Injection should succeed |
-| `test_insecure_app_pass.py`   | Tests login with correct credentials     | Insecure App     | ✅ Should allow login  |
-| `test_secure_app_failed.py`   | Uses SQL injection to bypass login       | Secure App       | ✅ Injection should fail |
-| `test_secure_app_pass.py`     | Tests login with correct credentials     | Secure App       | ✅ Should allow login  |
+| `test_insecure_app_failed.py` | Uses SQL injection to bypass login       | Insecure App     | Injection should succeed |
+| `test_insecure_app_pass.py`   | Tests login with correct credentials     | Insecure App     | Should allow login  |
+| `test_secure_app_failed.py`   | Uses SQL injection to bypass login       | Secure App       | Injection should fail |
+| `test_secure_app_pass.py`     | Tests login with correct credentials     | Secure App       | Should allow login  |
 
 ---
 
@@ -101,16 +101,16 @@ Open `demo_walkthrough.ipynb` to see a detailed, step-by-step explanation of the
 
 | Test File                            | Description                                | Target App      | Expected Result        |
 |-------------------------------------|--------------------------------------------|------------------|------------------------|
-| `test_insecure_blind_login.py`      | Blind SQLi using form login                | Insecure App     | ✅ Injection should succeed |
-| `test_secure_blind_login.py`        | Blind SQLi using form login                | Secure App       | ✅ Injection should fail |
-| `test_insecure_admin_bypass.py`     | SQLi bypass of admin role                  | Insecure App     | ✅ Injection should succeed |
-| `test_secure_admin_bypass.py`       | SQLi bypass of admin role                  | Secure App       | ✅ Injection should fail |
-| `test_insecure_api_login.py`        | JSON API login with SQLi                   | Insecure App     | ✅ Injection should succeed |
-| `test_secure_api_login.py`          | JSON API login with SQLi                   | Secure App       | ✅ Injection should fail |
+| `test_insecure_blind_login.py`      | Blind SQLi using form login                | Insecure App     | Injection should succeed |
+| `test_secure_blind_login.py`        | Blind SQLi using form login                | Secure App       | Injection should fail |
+| `test_insecure_admin_bypass.py`     | SQLi bypass of admin role                  | Insecure App     | Injection should succeed |
+| `test_secure_admin_bypass.py`       | SQLi bypass of admin role                  | Secure App       | Injection should fail |
+| `test_insecure_api_login.py`        | JSON API login with SQLi                   | Insecure App     | Injection should succeed |
+| `test_secure_api_login.py`          | JSON API login with SQLi                   | Secure App       | Injection should fail |
 
 ---
 
-## ⚠️ Note on GitHub Actions Test Failures
+## Note on GitHub Actions Test Failures
 
 Some test cases in this project are **intentionally designed to fail** to simulate vulnerabilities like:
 
